@@ -2,26 +2,31 @@
 import { createRouter, createWebHistory } from "vue-router";
 import TimeSheetForm from "@/views/timeSheet/TimeSheetForm.vue";
 import Home from "@/views/home/Home.vue";
+import HomeEmployee from "@/layouts/home/HomeEmployee.vue";
+import Configuration from "@/views/config/Configuration.vue";
+
+
 const routes = [
   {
     path: "/",
-    component: () => import("@/layouts/home/HomeEmployee.vue"),
+    component: HomeEmployee,
     children: [
       {
-        path: "/",
+        path: "",
         name: "Home",
-        // route level code-splitting
-        // this generates a separate chunk (about.[hash].js) for this route
-        // which is lazy-loaded when the route is visited.
-        component:Home,
+
+        component: Home,
+
         children: [
           {
-            path: "",
-            name: "FormTimeSheet",
-            // route level code-splitting
-            // this generates a separate chunk (about.[hash].js) for this route
-            // which is lazy-loaded when the route is visited.
+            path: "/timesheet",
+            name: "TimeSheetForm",
             component: TimeSheetForm,
+          },
+          {
+            path: "/configuration",
+            name: "Configuration",
+            component: Configuration,
           },
         ],
       },

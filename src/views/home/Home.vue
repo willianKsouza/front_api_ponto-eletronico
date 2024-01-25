@@ -16,14 +16,18 @@
         ></v-list-item>
         <v-divider></v-divider>
         <v-list-item
+
           prepend-icon="mdi-account-multiple"
           title="Time Sheet"
           value="#naosei1"
-        ></v-list-item>
+          to="/timesheet"
+        >
+      </v-list-item>
         <v-list-item
           prepend-icon="mdi-account-multiple"
           title="Configuration"
           value="#naosei2"
+          to="/configuration"
         ></v-list-item>
       </v-list>
     </v-navigation-drawer>
@@ -37,7 +41,8 @@
       ></v-app-bar-nav-icon>
     </v-app-bar>
     <v-main class="bg-orange-lighten-5">
-      <router-view />
+      {{ store.profile }}
+      <router-view></router-view>
     </v-main>
   </div>
 </template>
@@ -46,8 +51,10 @@
 import { onMounted, ref } from "vue";
 import { useDisplay } from "vuetify";
 import { useRoute } from "vue-router";
-import { useProfile } from "@/store/app";
 import { storeToRefs } from "pinia";
+import router from "@/router";
+import { useProfile } from "@/store/app";
+import store from "@/store";
 const { width } = useDisplay();
 const vNavHover = ref(true);
 const drawer = ref(true);
@@ -55,9 +62,16 @@ const route = useRoute();
 
 
 onMounted(() => {
-  const store = useProfile
-  const { profile, fetchProfileData } = storeToRefs(store)
+  router.push('/timesheet')
+  const store = useProfile()
 
-  console.log(profile,fetchProfileData);
+  const { showProfile, fetchProfileData } = storeToRefs(store)
+
+  async function fetchUser() {
+    const response = fetchProfileData('ada@gmail.com')
+    console.log(response);
+  }
+console.log(fetchUser());
+
 })
 </script>

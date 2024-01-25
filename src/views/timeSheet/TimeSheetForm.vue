@@ -1,14 +1,20 @@
+
 <template>
-
+  <div>
     <v-list class="bg-orange-lighten-5">
-      <time-sheet-cell-item f>Entrada</time-sheet-cell-item>
+      <TimeSheetCellItem v-for="mark in typesMarking" :key="mark">{{mark}}</TimeSheetCellItem>
     </v-list>
-
+  </div>
 </template>
 
 <script setup>
 import TimeSheetCellItem from "@/components/TimeSheetCellItem.vue";
 
 
-const typesMarking = ['Entrada', 'Entrada-Almoço', 'Saida-Almoço','Saida']
+const typesMarking = ['Entrada', 'Entrada-Almoço', 'Saida-Almoço', 'Saida']
+console.log('timesheetform');
 </script>
+
+<style lang="scss" scoped>
+
+</style>

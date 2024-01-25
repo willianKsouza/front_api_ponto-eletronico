@@ -1,9 +1,9 @@
 // Utilities
 import { defineStore } from "pinia";
-import { reactive, ref } from "vue";
+import { computed, ref } from "vue";
 
 export const useProfile = defineStore("profile", () => {
-  const profile = reactive({
+  const profile = ref({
     name: null,
     entrada: true,
     entrada_almoço: false,
@@ -11,8 +11,10 @@ export const useProfile = defineStore("profile", () => {
     saida: false,
   });
 
-const fetchProfileData = async (email) => {
-    return await fetch("http://localhost:3002/searchemployee", {
+  const showProfile = computed(() => profile.value)
+
+  async function fetchProfileData(email) {
+    const fetchUser = await fetch("http://localhost:3002/searchemployee", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -20,15 +22,10 @@ const fetchProfileData = async (email) => {
       body: JSON.stringify({
         email: email,
       }),
-    })
-      .then((value) => {
-        return value.json();
-      })
-      .then((value) => {
-        console.log(value);
-      });
+    });
+
+    return await fetchUser.json();
   }
-  return {profile, fetchProfileData}
+
+  return { showProfile, fetchProfileData };
 });
-
-
