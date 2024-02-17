@@ -1,31 +1,22 @@
 // Utilities
 import { defineStore } from "pinia";
-import { computed, ref } from "vue";
+import { computed, reactive, ref } from "vue";
 
 export const useProfile = defineStore("profile", () => {
-  const profile = ref({
-    name: null,
-    entrada: true,
-    entrada_almoço: false,
-    saida_almoço: false,
-    saida: false,
-  });
 
-  const showProfile = computed(() => profile.value)
 
-  async function fetchProfileData(email) {
-    const fetchUser = await fetch("http://localhost:3002/searchemployee", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: email,
-      }),
+  async function fetchProfileData() {
+    const fetchUser = await fetch("http://localhost:3002/findemployee", {
+      method:'GET',
+      credentials:'include',
+
     });
 
     return await fetchUser.json();
   }
 
-  return { showProfile, fetchProfileData };
+
+
+
+  return { fetchProfileData };
 });
