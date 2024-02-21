@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { reactive } from "vue";
+import { computed, reactive } from "vue";
 
 export const useTimeSheetStore = defineStore("timeSheet", () => {
     // const isMarkingTimeSheet = reactive({
@@ -8,32 +8,41 @@ export const useTimeSheetStore = defineStore("timeSheet", () => {
   //   saida_almoço: false,
   //   saida: false,
   // });
+
+  const typesMarkingBackend = {
+    'Entrada': "in_time",
+    'Entrada-Almoço': "launch_in",
+    'Saída-Almoço': "launch_out",
+    'Saída': "out_time"
+  }
   const SheetInfo = reactive([
     {
       typeMarking:'Entrada',
       hours:null,
-      isMarking:true
+      isMarking:false
     },
     {
       typeMarking:'Entrada-Almoço',
       hours:null,
-      isMarking:true
+      isMarking:false
     },
     {
       typeMarking:'Saída-Almoço',
       hours:null,
-      isMarking:true
+      isMarking:false
     },
     {
       typeMarking:'entrada',
       hours:null,
-      isMarking:true
+      isMarking:false
     }
   ]);
 
-  function setSheetData(index, hours, boolean) {
+
+
+  function setSheetData(index, hours) {
     SheetInfo[index].hours = hours
-    SheetInfo[index].isMarking = boolean
+    SheetInfo[index].isMarking = !SheetInfo[index].isMarking
   }
 
 
@@ -67,5 +76,5 @@ export const useTimeSheetStore = defineStore("timeSheet", () => {
     return await fetchUser.json();
   }
 
-  return { fetchTimeSheetUserData, fetchMarkTimeSheet, SheetInfo, setSheetData };
+  return { fetchTimeSheetUserData, fetchMarkTimeSheet, SheetInfo, setSheetData, typesMarkingBackend };
 });

@@ -19,12 +19,12 @@ const routes = [
 
         children: [
           {
-            path: "/timesheet",
+            path: "",
             name: "TimeSheetForm",
             component: TimeSheetForm,
           },
           {
-            path: "/configuration",
+            path: "",
             name: "Configuration",
             component: Configuration,
           },

@@ -18,6 +18,7 @@
       <v-app-bar-nav-icon v-if="width <= 600" variant="text" @click="drawer = !drawer"></v-app-bar-nav-icon>
     </v-app-bar>
     <v-main class="bg-orange-lighten-5">
+      
       <router-view></router-view>
     </v-main>
   </div>

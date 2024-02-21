@@ -8,7 +8,7 @@
               <slot></slot>
             </v-list-item-title>
             <p>{{ SheetInfo[props.cellData.index].hours }}</p>
-            <v-btn color="brown-darken-1" @click="markCell" v-if="SheetInfo[props.cellData.index].isMarking">Marcar</v-btn>
+            <v-btn color="brown-darken-1" @click="markCell" v-if="!SheetInfo[props.cellData.index].isMarking">Marcar</v-btn>
             <v-btn color="brown-darken-1" v-else="SheetInfo[props.cellData.index].isMarking">Marcado</v-btn>
           </v-col>
         </v-row>
@@ -39,20 +39,15 @@ import { ref } from 'vue';
 import { storeToRefs } from 'pinia';
 const showContent = ref(true)
 const store = useTimeSheetStore()
-const { fetchMarkTimeSheet, setSheetData  } = store
+const { fetchMarkTimeSheet, setSheetData, typesMarkingBackend  } = store
 const { SheetInfo } = storeToRefs(store)
 const props = defineProps(['cellData'])
 async function markCell() {
-  const typesMarkingBackend = {
-    'Entrada': "in_time",
-    'Entrada-Almoço': "launch_in",
-    'Saída-Almoço': "launch_out",
-    'Saída': "out_time"
-  }
+
   console.log(typesMarkingBackend[props.cellData.mark]);
   fetchMarkTimeSheet(typesMarkingBackend[props.cellData.mark], getDate('fullDate'), 8)
     .then(response => {
-      setSheetData(props.cellData.index ,getDate(), false)
+      setSheetData(props.cellData.index ,getDate())
     })
     .catch(erro => {
       showContent.value = !showContent.value
