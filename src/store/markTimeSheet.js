@@ -49,15 +49,19 @@ export const useTimeSheetStore = defineStore("timeSheet", () => {
 
 
   async function fetchTimeSheetUserData() {
-    const fetchUser = await fetch(`http://localhost:3002/timesheet/`, {
-      method: "GET",
-      credentials:'include',
-      headers: {
-        "Content-Type": "application/json",
-      }
-    });
-
-    return await fetchUser.json();
+    try {
+      const fetchUser = await fetch(`http://localhost:3002/timesheet/`, {
+        method: "GET",
+        credentials:'include',
+        headers: {
+          "Content-Type": "application/json",
+        }
+      });
+  
+      return await fetchUser.json();
+    } catch (error) {
+      console.log(error);
+    }
   }
   async function fetchMarkTimeSheet(typeMarking, currentTimeStamp, workLoad) {
     const fetchUser = await fetch("http://localhost:3002/timesheet", {

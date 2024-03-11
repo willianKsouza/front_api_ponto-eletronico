@@ -9,6 +9,17 @@ import Configuration from "@/views/config/Configuration.vue";
 const routes = [
   {
     path: "/",
+    component: () => import("@/layouts/login/FormLoginLayout.vue"),
+    children: [
+      {
+        path: "",
+        name: "Login",
+        component: () => import("@/views/login/FormLogin.vue"),
+      },
+    ],
+  },
+  {
+    path: "/home",
     component: HomeEmployee,
     children: [
       {
@@ -31,18 +42,47 @@ const routes = [
       },
     ],
   },
-  {
-    path: "/login",
-    component: () => import("@/layouts/login/FormLoginLayout.vue"),
-    children: [
-      {
-        path: "",
-        name: "Login",
-        component: () => import("@/views/login/FormLogin.vue"),
-      },
-    ],
-  },
 ];
+
+
+
+// const routes = [
+//   {
+//     path: "/",
+//     component: HomeEmployee,
+//     children: [
+//       {
+//         path: "",
+//         name: "Home",
+//         component:Home,
+
+//         children: [
+//           {
+//             path: "/timesheet",
+//             name: "TimeSheetForm",
+//             component: TimeSheetForm,
+//           },
+//           {
+//             path: "/configuration",
+//             name: "Configuration",
+//             component: Configuration,
+//           },
+//         ],
+//       },
+//     ],
+//   },
+//   {
+//     path: "/login",
+//     component: () => import("@/layouts/login/FormLoginLayout.vue"),
+//     children: [
+//       {
+//         path: "",
+//         name: "Login",
+//         component: () => import("@/views/login/FormLogin.vue"),
+//       },
+//     ],
+//   },
+// ];
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
