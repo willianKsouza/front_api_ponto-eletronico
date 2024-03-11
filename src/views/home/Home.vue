@@ -18,8 +18,10 @@
       <v-app-bar-nav-icon v-if="width <= 600" variant="text" @click="drawer = !drawer"></v-app-bar-nav-icon>
     </v-app-bar>
     <v-main class="bg-orange-lighten-5">
+
+        <router-view></router-view>
+
       
-      <router-view></router-view>
     </v-main>
   </div>
 </template>
@@ -29,13 +31,13 @@ import { onMounted, ref, reactive } from "vue";
 import { useDisplay } from "vuetify";
 import router from "@/router";
 import { useProfile } from "@/store/app";
-
+import { useRoute } from "vue-router";
 
 const { width } = useDisplay();
 const vNavHover = ref(true);
 const drawer = ref(true);
 let profileData = reactive({})
-
+const route = useRoute()
 
 onMounted(() => {
   const { fetchProfileData } = useProfile()
@@ -45,8 +47,14 @@ onMounted(() => {
     profileData = { name_employee, email }
   }
   fetchUser()
+  console.log(route.path);
+  if (route.path == "/configuration") {
+   
+  }else {
+    router.push({ name: 'TimeSheetForm' })
+  }
 
-  router.push({ name: 'TimeSheetForm' })
+  
 
 })
 </script>

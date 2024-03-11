@@ -1,5 +1,5 @@
 
-import { createRouter, createWebHistory } from "vue-router";
+import { createRouter, createWebHistory, } from "vue-router";
 import TimeSheetForm from "@/views/timeSheet/TimeSheetForm.vue";
 import Home from "@/views/home/Home.vue";
 import HomeEmployee from "@/layouts/home/HomeEmployee.vue";
@@ -14,17 +14,16 @@ const routes = [
       {
         path: "",
         name: "Home",
-
-        component: Home,
+        component:Home,
 
         children: [
           {
-            path: "",
+            path: "/timesheet",
             name: "TimeSheetForm",
             component: TimeSheetForm,
           },
           {
-            path: "",
+            path: "/configuration",
             name: "Configuration",
             component: Configuration,
           },
