@@ -36,7 +36,7 @@ function check() {
   const submit = document.getElementById("btnSubmit");
   const formData = new FormData(loginForm, submit);
   // as been blocked by CORS policy: Request header field credentials is not allowed by Access-Control-Allow-Headers in preflight response.
-  fetch("http://localhost:3002/login", {
+  fetch("https://api-ponto-eletronico-deploy.onrender.com/login", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

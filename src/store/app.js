@@ -8,7 +8,7 @@ export const useProfile = defineStore("profile", () => {
   async function fetchProfileData() {
 
     try {
-      const fetchUser = await fetch("http://localhost:3002/findemployee", {
+      const fetchUser = await fetch("https://api-ponto-eletronico-deploy.onrender.com/findemployee", {
         method:'GET',
         credentials:'include',
   
