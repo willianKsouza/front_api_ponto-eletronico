@@ -1,14 +1,17 @@
 // Utilities
 import { defineStore } from "pinia";
-import { computed, reactive, ref } from "vue";
+import { ref } from "vue";
 
 export const useProfile = defineStore("profile", () => {
+
+
+  let perfilInfo = ref({})
 
 
   async function fetchProfileData() {
 
     try {
-      const fetchUser = await fetch("https://api-ponto-eletronico-deploy.onrender.com/findemployee", {
+      const fetchUser = await fetch(import.meta.env.VITE_FIND_EMPLOYEE, {
         method:'GET',
         credentials:'include',
   
@@ -23,5 +26,5 @@ export const useProfile = defineStore("profile", () => {
 
 
 
-  return { fetchProfileData };
+  return { fetchProfileData, perfilInfo };
 });

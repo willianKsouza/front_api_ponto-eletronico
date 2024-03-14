@@ -50,7 +50,7 @@ export const useTimeSheetStore = defineStore("timeSheet", () => {
 
   async function fetchTimeSheetUserData() {
     try {
-      const fetchUser = await fetch(`https://api-ponto-eletronico-deploy.onrender.com/timesheet/`, {
+      const fetchUser = await fetch(import.meta.env.VITE_FIND_TIMESHEET, {
         method: "GET",
         credentials:'include',
         headers: {
@@ -64,7 +64,7 @@ export const useTimeSheetStore = defineStore("timeSheet", () => {
     }
   }
   async function fetchMarkTimeSheet(typeMarking, currentTimeStamp, workLoad) {
-    const fetchUser = await fetch("https://api-ponto-eletronico-deploy.onrender.com/timesheet", {
+    const fetchUser = await fetch(import.meta.env.VITE_MARK_TIMESHEET, {
       method: "POST",
       credentials:'include',
       headers: {

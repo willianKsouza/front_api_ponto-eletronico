@@ -25,7 +25,7 @@
 
 <script setup>
 import { useRouter } from 'vue-router'
-import { useProfile } from '@/store/app';
+
 import Footer from "@/components/Footer.vue";
 
 
@@ -36,7 +36,7 @@ function check() {
   const submit = document.getElementById("btnSubmit");
   const formData = new FormData(loginForm, submit);
   // as been blocked by CORS policy: Request header field credentials is not allowed by Access-Control-Allow-Headers in preflight response.
-  fetch("https://api-ponto-eletronico-deploy.onrender.com/login", {
+  fetch(import.meta.env.VITE_API_LOGIN, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

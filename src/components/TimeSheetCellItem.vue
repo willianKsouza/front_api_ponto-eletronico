@@ -44,7 +44,6 @@ const { SheetInfo } = storeToRefs(store)
 const props = defineProps(['cellData'])
 async function markCell() {
 
-  console.log(typesMarkingBackend[props.cellData.mark]);
   fetchMarkTimeSheet(typesMarkingBackend[props.cellData.mark], getDate('fullDate'), 8)
     .then(response => {
       setSheetData(props.cellData.index ,getDate())

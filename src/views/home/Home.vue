@@ -38,9 +38,6 @@
         variant="text"
         @click="drawer = !drawer"
       ></v-app-bar-nav-icon>
-      <v-btn
-        @click="drawer = !drawer"
-      >ddd</v-btn>
     </v-app-bar>
     <v-main class="bg-orange-lighten-5">
       <router-view></router-view>
@@ -60,22 +57,22 @@ const vNavHover = ref(true);
 const drawer = ref(true);
 let profileData = reactive({});
 const route = useRoute();
-
+const { perfilInfo } = useProfile();
+perfilInfo.value = { ...profileData };
 onMounted(() => {
-  const { fetchProfileData } = useProfile();
+  const { fetchProfileData} = useProfile();
   async function fetchUser() {
     try {
       const response = await fetchProfileData();
-    const { name_employee, email, function_employee
- } = response.employee;
-    profileData = { name_employee, email, function_employee };
+      const { name_employee, email, function_employee } = response.employee;
+
+      profileData = { name_employee, email, function_employee };
     } catch (error) {
       router.push({ name: 'Login' });
     }
   }
 
   fetchUser();
- 
 
   if (route.path == '/configuration') {
   } else {
