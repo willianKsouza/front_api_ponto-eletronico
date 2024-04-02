@@ -33,7 +33,8 @@ onMounted(() => {
         })
       })
       .catch((error => {
-        return
+        console.log(error);
+        console.log('timehseetform.vue folha de ponto veio vazia');
       }))
   }
   getTimeSheetData()
