@@ -1,1 +1,0 @@
-import{_ as a,c as r,w as e,V as n,r as s,o as c,a as o,b as _}from"./index-c35a26cb.js";const l={};function i(u,f){const t=s("router-view");return c(),r(n,null,{default:e(()=>[o(_,{class:"bg-brown-lighten-1"},{default:e(()=>[o(t)]),_:1})]),_:1})}const d=a(l,[["render",i]]);export{d as default};

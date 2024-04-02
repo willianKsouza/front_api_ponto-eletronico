@@ -68,7 +68,7 @@ onMounted(() => {
 
       profileData = { name_employee, email, function_employee };
     } catch (error) {
-      router.push({ name: 'Login' });
+      console.log(error);
     }
   }
 
