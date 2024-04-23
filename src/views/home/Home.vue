@@ -59,24 +59,31 @@ let profileData = reactive({});
 const route = useRoute();
 const { perfilInfo } = useProfile();
 perfilInfo.value = { ...profileData };
-onMounted(() => {
-  const { fetchProfileData} = useProfile();
-  async function fetchUser() {
-    try {
-      const response = await fetchProfileData();
-      const { name_employee, email, function_employee } = response.employee;
+onMounted(() =>{
+  fetch(import.meta.env.VITE_FIND_EMPLOYEE, {
+        method:'GET',
+        credentials:'include',
+  
+      }).then(response => console.log(response))
+})
+// onMounted(() => {
+//   const { fetchProfileData} = useProfile();
+//   async function fetchUser() {
+//     try {
+//       const response = await fetchProfileData();
+//       const { name_employee, email, function_employee } = response.employee;
 
-      profileData = { name_employee, email, function_employee };
-    } catch (error) {
-      console.log(error);
-    }
-  }
+//       profileData = { name_employee, email, function_employee };
+//     } catch (error) {
+//       console.log(error);
+//     }
+//   }
 
-  fetchUser();
+//   fetchUser();
 
-  if (route.path == '/configuration') {
-  } else {
-    router.push({ name: 'TimeSheetForm' });
-  }
-});
+//   if (route.path == '/configuration') {
+//   } else {
+//     router.push({ name: 'TimeSheetForm' });
+//   }
+// });
 </script>
