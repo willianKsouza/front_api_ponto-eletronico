@@ -41,7 +41,6 @@ function check() {
     headers: {
       "Content-Type": "application/json",
     },
-    credentials:'include',
     body: JSON.stringify({
       email: formData.get("email").trim(),
       password: formData.get("password").trim(),
