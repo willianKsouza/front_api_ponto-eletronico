@@ -64,6 +64,7 @@ function check() {
       password: formData.get('password').trim(),
     }),
   }).then(response => {
+    console.log(response);
     const securityData = {
       token: response.headers.get('Token'),
       auth: response.headers.get('Auth'),
@@ -75,6 +76,7 @@ function check() {
     };
     store.addPerfil(securityData)
     if (securityData.auth) {
+      console.log('entrou no if do securityData.auth', securityData.auth);
       localStorage.setItem('securityData', JSON.stringify(securityData));
       router.push({ name: 'Home' });
     } else {
