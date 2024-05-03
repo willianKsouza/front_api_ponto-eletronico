@@ -11,8 +11,11 @@
 <script setup>
 import TimeSheetCellItem from "@/components/TimeSheetCellItem.vue";
 import { useTimeSheetStore } from '@/store/markTimeSheet'
+import { useProfile } from '@/store/app';
 import { onMounted } from "vue";
 import { storeToRefs } from 'pinia';
+
+
 
 import formatarDate from "@/helpers/formatDate";
 const typesMarking = ['Entrada', 'Entrada-Almoço', 'Saída-Almoço', 'Saída']
@@ -20,17 +23,24 @@ const store = useTimeSheetStore()
 const { fetchTimeSheetUserData } = store
 const { SheetInfo } = storeToRefs(store)
 
+
+const ProfileStore = useProfile()
+
 onMounted(() => {
   async function getTimeSheetData() {
     await fetchTimeSheetUserData()
       .then(data => {
-
-        const { in_time, launch_in, launch_out, out_time } = data.timeSheetEmployee
+        if (data.timeSheetEmployee == null) {
+          return
+        }else{
+          const { in_time, launch_in, launch_out, out_time } = data.timeSheetEmployee
         const hoursTimeSheet = [in_time, launch_in, launch_out, out_time]
 
         SheetInfo.value.map((item, index) => {
           item.hours = formatarDate(hoursTimeSheet[index])
         })
+        }
+        
       })
       .catch((error => {
         console.log(error);

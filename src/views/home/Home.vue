@@ -56,34 +56,30 @@ const { width } = useDisplay();
 const vNavHover = ref(true);
 const drawer = ref(true);
 let profileData = reactive({});
-const route = useRoute();
-const { perfilInfo } = useProfile();
-perfilInfo.value = { ...profileData };
-onMounted(() =>{
-  fetch(import.meta.env.VITE_FIND_EMPLOYEE, {
-        method:'GET',
-        credentials:'include',
-  
-      }).then(response => console.log(response))
-})
-// onMounted(() => {
-//   const { fetchProfileData} = useProfile();
-//   async function fetchUser() {
-//     try {
-//       const response = await fetchProfileData();
-//       const { name_employee, email, function_employee } = response.employee;
 
-//       profileData = { name_employee, email, function_employee };
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   }
+console.log(profileData);
 
-//   fetchUser();
+onMounted(() => {
 
-//   if (route.path == '/configuration') {
-//   } else {
-//     router.push({ name: 'TimeSheetForm' });
-//   }
-// });
+  const { fetchProfileData } = useProfile();
+  async function fetchUser() {
+    try {
+      const response = await fetchProfileData();
+
+      const { name_employee, email, function_employee } = response.employee;
+
+      profileData = { name_employee, email, function_employee };
+      console.log(profileData);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  fetchUser();
+
+  if (router.path == '/configuration') {
+  } else {
+    router.push({ name: 'TimeSheetForm' });
+  }
+});
 </script>

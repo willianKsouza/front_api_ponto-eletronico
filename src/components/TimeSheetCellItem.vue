@@ -49,6 +49,7 @@ async function markCell() {
       setSheetData(props.cellData.index ,getDate())
     })
     .catch(erro => {
+      console.log('timesheetcellitem catch', erro);
       showContent.value = !showContent.value
     })
 

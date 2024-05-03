@@ -6,13 +6,30 @@
           <v-card-title class="bg-orange-darken-1"> Login </v-card-title>
           <v-container>
             <v-form id="loginForm">
-              <v-text-field name="email" label="Email" type="input"
-                hint="Enter your Email to access this website"></v-text-field>
-              <v-text-field name="password" class="mt-2" label="Password" type="input"
-                hint="Enter your password to access this website"></v-text-field>
+              <v-text-field
+                name="email"
+                label="Email"
+                type="input"
+                hint="Enter your Email to access this website"
+              ></v-text-field>
+              <v-text-field
+                name="password"
+                class="mt-2"
+                label="Password"
+                type="input"
+                hint="Enter your password to access this website"
+              ></v-text-field>
               <div class="d-flex justify-end">
-                <v-btn tag="input" type="submit" value="Entrar" id="btnSubmit" class="bg-brown-darken-1 mt-2" size="large"
-                  @click.prevent="check">Login</v-btn>
+                <v-btn
+                  tag="input"
+                  type="submit"
+                  value="Entrar"
+                  id="btnSubmit"
+                  class="bg-brown-darken-1 mt-2"
+                  size="large"
+                  @click.prevent="check"
+                  >Login</v-btn
+                >
               </div>
             </v-form>
           </v-container>
@@ -24,38 +41,47 @@
 </template>
 
 <script setup>
-import { useRouter } from 'vue-router'
+import { useRouter } from 'vue-router';
+import { useProfile } from '@/store/app';
+import Footer from '@/components/Footer.vue';
+const store = useProfile();
 
-import Footer from "@/components/Footer.vue";
 
 
-
-const router = useRouter()
+const router = useRouter();
 function check() {
-  const loginForm = document.getElementById("loginForm");
-  const submit = document.getElementById("btnSubmit");
+  const loginForm = document.getElementById('loginForm');
+  const submit = document.getElementById('btnSubmit');
   const formData = new FormData(loginForm, submit);
-  // as been blocked by CORS policy: Request header field credentials is not allowed by Access-Control-Allow-Headers in preflight response.
+
   fetch(import.meta.env.VITE_API_LOGIN, {
-    method: "POST",
+    method: 'POST',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      email: formData.get("email").trim(),
-      password: formData.get("password").trim(),
+      email: formData.get('email').trim(),
+      password: formData.get('password').trim(),
     }),
-  }).then((value) => {
-    return value.json()
-  }).then((data) => {
-    console.log(data);
-    if (data.auth) {
-      return router.push({ name: 'Home' })
+  }).then(response => {
+    const securityData = {
+      token: response.headers.get('Token'),
+      auth: response.headers.get('Auth'),
+      employee_id: response.headers.get('Employee_id'),
+      time_sheet_id: response.headers.get('Time_sheet_id'),
+      function_employee: response.headers.get('Function_employee'),
+      name_employee: response.headers.get('Name_employee'),
+      email: response.headers.get('Email'),
+    };
+    store.addPerfil(securityData)
+    if (securityData.auth) {
+      localStorage.setItem('securityData', JSON.stringify(securityData));
+      router.push({ name: 'Home' });
+    } else {
+      router.push({ name: 'Login' });
     }
-    return router.push({ name: 'Login' })
-  })
+  });
 }
-
 
 </script>
 
