@@ -43,11 +43,12 @@ import Configuration from "@/views/config/Configuration.vue";
 //     ],
 //   },
 // ];
+
 const routes = [
   {
-    path: "/",
-    component: () => import("@/layouts/login/FormLoginLayout.vue"),
-    children: [
+    path:"/",
+    component: () => import("@/layouts/home/HomeEmployee.vue"),
+    children:[
       {
         path: "",
         name: "Login",
@@ -70,10 +71,10 @@ const routes = [
               },
         ],
       },
-    ],
-  },
- 
-];
+    ]
+  }
+]
+
 
 
 
