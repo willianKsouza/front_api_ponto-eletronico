@@ -6,6 +6,43 @@ import HomeEmployee from "@/layouts/home/HomeEmployee.vue";
 import Configuration from "@/views/config/Configuration.vue";
 
 
+// const routes = [
+//   {
+//     path: "/",
+//     component: () => import("@/layouts/login/FormLoginLayout.vue"),
+//     children: [
+//       {
+//         path: "",
+//         name: "Login",
+//         component: () => import("@/views/login/FormLogin.vue"),
+//       },
+//     ],
+//   },
+//   {
+//     path: "/home",
+//     component: HomeEmployee,
+//     children: [
+//       {
+//         path: "",
+//         name: "Home",
+//         component:Home,
+
+//         children: [
+//           {
+//             path: "/timesheet",
+//             name: "TimeSheetForm",
+//             component: TimeSheetForm,
+//           },
+//           {
+//             path: "/configuration",
+//             name: "Configuration",
+//             component: Configuration,
+//           },
+//         ],
+//       },
+//     ],
+//   },
+// ];
 const routes = [
   {
     path: "/",
@@ -16,32 +53,26 @@ const routes = [
         name: "Login",
         component: () => import("@/views/login/FormLogin.vue"),
       },
-    ],
-  },
-  {
-    path: "/home",
-    component: HomeEmployee,
-    children: [
       {
-        path: "",
+        path: "/home",
         name: "Home",
         component:Home,
-
         children: [
-          {
-            path: "/timesheet",
-            name: "TimeSheetForm",
-            component: TimeSheetForm,
-          },
-          {
-            path: "/configuration",
-            name: "Configuration",
-            component: Configuration,
-          },
+              {
+                path: "/timesheet",
+                name: "TimeSheetForm",
+                component: TimeSheetForm,
+              },
+              {
+                path: "/configuration",
+                name: "Configuration",
+                component: Configuration,
+              },
         ],
       },
     ],
   },
+ 
 ];
 
 

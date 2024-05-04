@@ -78,7 +78,7 @@ function check() {
     if (securityData.auth) {
       console.log('entrou no if do securityData.auth', securityData.auth);
       localStorage.setItem('securityData', JSON.stringify(securityData));
-      router.push({ name: 'Home' });
+      router.push({ name: 'TimeSheetForm' });
     } else {
       router.push({ name: 'Login' });
     }
