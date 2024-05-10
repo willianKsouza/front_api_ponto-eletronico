@@ -1,5 +1,6 @@
 <template>
-  <v-container>
+
+<v-container>
     <v-row>
       <v-col>
         <v-text-field
@@ -12,7 +13,7 @@
           label="Cargo"
           variant="solo-filled"
         ></v-text-field>
-          <v-file-input @change="uploadFile" variant="solo-filled" accept="image/png, image/jpeg" label="File input"></v-file-input>
+          <UploadFile />
       </v-col>
       <v-col>
         <v-text-field
@@ -34,14 +35,6 @@
 </template>
 
 <script setup>
-import { onMounted } from 'vue';
-const apiUrl = import.meta.VITE_UPLOAD_FILE
-const uploadFile = (event) => console.log(event.target.files);
-onMounted(() => {
+import UploadFile from "./UploadFile.vue"
 
-
-
-});
 </script>
-
-<style lang="scss" scoped></style>

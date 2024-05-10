@@ -3,7 +3,7 @@ import { createRouter, createWebHistory, } from "vue-router";
 import TimeSheetForm from "@/views/timeSheet/TimeSheetForm.vue";
 import Home from "@/views/home/Home.vue";
 import HomeEmployee from "@/layouts/home/HomeEmployee.vue";
-import Configuration from "@/views/config/Configuration.vue";
+import Dados from "@/views/data/Dados.vue";
 
 
 // const routes = [
@@ -55,6 +55,11 @@ const routes = [
         component: () => import("@/views/login/FormLogin.vue"),
       },
       {
+        path: "/forgot",
+        name: "ForgotPassword",
+        component: () => import("@/views/login/ForgotPassword.vue"),
+      },
+      {
         path: "/home",
         name: "Home",
         component:Home,
@@ -65,9 +70,14 @@ const routes = [
                 component: TimeSheetForm,
               },
               {
-                path: "/configuration",
-                name: "Configuration",
-                component: Configuration,
+                path: "/dados",
+                name: "Dados",
+                component: Dados,
+              },
+              {
+                path: "/administrador",
+                name: "Administrador",
+                component: () => import("@/views/administrador/Administrador.vue"),
               },
         ],
       },

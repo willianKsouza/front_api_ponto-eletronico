@@ -19,7 +19,26 @@
                 type="input"
                 hint="Enter your password to access this website"
               ></v-text-field>
-              <div class="d-flex justify-end">
+              <div class="d-flex justify-space-between align-baseline">
+                <v-hover>
+                  <template v-slot:default="{ isHovering, props }">
+                    <v-btn
+                  tag="input"
+                  type="submit"
+                  value="Esqueceu a senha?"
+                  id="btnSubmit"
+                  v-bind="props"
+                  :color="isHovering ? 'orange-lighten-2' : undefined"
+                  class="mt-2"
+                  size="large"
+                  rounded="lg"
+                  variant="outlined"
+                  @click.prevent="forgotPassword"
+                  >Login</v-btn
+                >
+                  </template>
+                </v-hover>
+                
                 <v-btn
                   tag="input"
                   type="submit"
@@ -27,7 +46,8 @@
                   id="btnSubmit"
                   class="bg-brown-darken-1 mt-2"
                   size="large"
-                  @click.prevent="check"
+                  rounded="lg"
+                  @click.prevent="login"
                   >Login</v-btn
                 >
               </div>
@@ -46,10 +66,8 @@ import { useProfile } from '@/store/app';
 import Footer from '@/components/Footer.vue';
 const store = useProfile();
 
-
-
 const router = useRouter();
-function check() {
+function login() {
   const loginForm = document.getElementById('loginForm');
   const submit = document.getElementById('btnSubmit');
   const formData = new FormData(loginForm, submit);
@@ -74,7 +92,7 @@ function check() {
       name_employee: response.headers.get('Name_employee'),
       email: response.headers.get('Email'),
     };
-    store.addPerfil(securityData)
+    store.addPerfil(securityData);
     if (securityData.auth) {
       console.log('entrou no if do securityData.auth', securityData.auth);
       localStorage.setItem('securityData', JSON.stringify(securityData));
@@ -85,6 +103,9 @@ function check() {
   });
 }
 
+function forgotPassword(){
+  router.push({ name: 'ForgotPassword' });
+}
 </script>
 
 <style lang="scss" scoped></style>

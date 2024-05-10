@@ -10,7 +10,7 @@
     >
       <v-list>
         <v-list-item
-          prepend-avatar="https://randomuser.me/api/portraits/women/85.jpg"
+          :prepend-avatar="profileData.avatar_employee"
           :title="profileData.name_employee"
           :subtitle="profileData.email"
         ></v-list-item>
@@ -18,15 +18,18 @@
         <v-list-item
           prepend-icon="mdi-account-multiple"
           title="Time Sheet"
-          value="#naosei1"
           to="/timesheet"
         >
         </v-list-item>
         <v-list-item
           prepend-icon="mdi-account-multiple"
-          title="Configuration"
-          value="#naosei2"
-          to="/configuration"
+          title="Dados"
+          to="/dados"
+        ></v-list-item>
+        <v-list-item
+          prepend-icon="mdi-account-multiple"
+          title="Administrador"
+          to="/administrador"
         ></v-list-item>
       </v-list>
     </v-navigation-drawer>
@@ -66,9 +69,9 @@ onMounted(() => {
     try {
       const response = await fetchProfileData();
 
-      const { name_employee, email, function_employee } = response.employee;
+      const { name_employee, email, function_employee, avatar_employee } = response.employee;
 
-      profileData = { name_employee, email, function_employee };
+      profileData = { name_employee, email, function_employee,avatar_employee };
       console.log(profileData);
     } catch (error) {
       console.log(error);
@@ -77,9 +80,10 @@ onMounted(() => {
 
   fetchUser();
 
-  if (router.path == '/configuration') {
+  if (router.path == '/dados') {
   } else {
     router.push({ name: 'TimeSheetForm' });
   }
 });
+// v-if="profileData.function_employee === 'adm'"
 </script>

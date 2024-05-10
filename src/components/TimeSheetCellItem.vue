@@ -9,13 +9,13 @@
             </v-list-item-title>
             <p>{{ SheetInfo[props.cellData.index].hours }}</p>
             <v-btn color="brown-darken-1" @click="markCell" v-if="!SheetInfo[props.cellData.index].isMarking">Marcar</v-btn>
-            <v-btn color="brown-darken-1" v-else="SheetInfo[props.cellData.index].isMarking">Marcado</v-btn>
+            <v-btn color="brown-darken-1" v-else>Marcado</v-btn>
           </v-col>
         </v-row>
       </v-container>
     </v-list-item>
   </v-list>
-  <v-list class="bg-orange-lighten-5" v-else="showContent">
+  <v-list class="bg-orange-lighten-5" v-else>
     <v-list-item>
       <v-container fluid>
         <v-row>
